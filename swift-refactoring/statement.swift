@@ -26,14 +26,18 @@ func statement(invoice: Invoice, plays: Plays) throws -> String {
         totalAmount += try amountFor(performance)
     }
     
-    var volumeCredits = 0
-    for performance in invoice.performances {
-        volumeCredits += try volumeCreditsFor(performance)
-    }
-
+    let volumeCredits = try totalVolumeCredits()
     result += "총액: $\(totalAmount/10)\n"
     result += "적립 포인트: \(volumeCredits)점\n"
     return result
+    
+    func totalVolumeCredits() throws -> Int {
+        var volumeCredits = 0
+        for performance in invoice.performances {
+            volumeCredits += try volumeCreditsFor(performance)
+        }
+        return volumeCredits
+    }
     
     func volumeCreditsFor(_ performance: Performance) throws -> Int {
         var result = 0

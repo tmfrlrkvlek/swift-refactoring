@@ -23,11 +23,7 @@ func statement(invoice: Invoice, plays: Plays) throws -> String {
     var result = "청구 내역 (고객명: \(invoice.customer))\n"
 
     for performance in invoice.performances {
-        volumeCredits += max(performance.audience - 30, 0)
-        if (try playFor(performance).type == .comedy) {
-            volumeCredits += Int(performance.audience / 5)
-        }
-
+        volumeCredits += try volumeCreditsFor(performance)
         result += " \(try playFor(performance).name): $\(try amountFor(performance)/100) (\(performance.audience)석)\n"
         totalAmount += try amountFor(performance)
     }
@@ -35,6 +31,15 @@ func statement(invoice: Invoice, plays: Plays) throws -> String {
     result += "총액: $\(totalAmount/10)\n"
     result += "적립 포인트: \(volumeCredits)점\n"
     return result
+    
+    func volumeCreditsFor(_ performance: Performance) throws -> Int {
+        var volumeCredits = 0
+        volumeCredits += max(performance.audience - 30, 0)
+        if (try playFor(performance).type == .comedy) {
+            volumeCredits += Int(performance.audience / 5)
+        }
+        return volumeCredits
+    }
     
     func playFor(_ performance: Performance) throws -> Play {
         guard let play =  plays[performance.playID] else {

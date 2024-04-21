@@ -19,11 +19,9 @@ enum StatementError: Error {
 
 func statement(invoice: Invoice, plays: Plays) throws -> String {
     var result = "청구 내역 (고객명: \(invoice.customer))\n"
-
     for performance in invoice.performances {
         result += " \(try playFor(performance).name): $\(try amountFor(performance)/100) (\(performance.audience)석)\n"
     }
-    
     result += "총액: $\(try totalAmount()/10)\n"
     result += "적립 포인트: \(try totalVolumeCredits())점\n"
     return result

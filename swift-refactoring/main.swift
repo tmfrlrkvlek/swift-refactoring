@@ -21,5 +21,7 @@ func main() {
           let plays = try? JSONDecoder().decode(Plays.self, from: playsData)
     else { return }
     
-    print(statement(invoice: invoice, plays: plays))
+    let errorMessage: String = "오류가 발생하였습니다."
+    let message: String? = try? statement(invoice: invoice, plays: plays)
+    print(message ?? errorMessage)
 }

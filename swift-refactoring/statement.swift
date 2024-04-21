@@ -13,13 +13,17 @@ import Foundation
  2. 연극 장르와 공연료 정책이 달라질 때마다 statement() 함수를 수정해야 함
  **/
 
-func statement(invoice: Invoice, plays: Plays) -> String {
+enum StatementError: Error {
+    case playIDNotMatched
+}
+
+func statement(invoice: Invoice, plays: Plays) throws -> String {
     var totalAmount = 0
     var volumeCredits = 0
     var result = "청구 내역 (고객명: \(invoice.customer))\n"
 
     for performance in invoice.performances {
-        guard let play = plays[performance.playID] else { continue }
+        let play = try playFor(performance)
         let amount = amountFor(performance: performance, with: play)
 
         volumeCredits += max(performance.audience - 30, 0)
@@ -34,6 +38,13 @@ func statement(invoice: Invoice, plays: Plays) -> String {
     result += "총액: $\(totalAmount/10)\n"
     result += "적립 포인트: \(volumeCredits)점\n"
     return result
+    
+    func playFor(_ performance: Performance) throws -> Play {
+        guard let play =  plays[performance.playID] else {
+            throw StatementError.playIDNotMatched
+        }
+        return play
+    }
     
     func amountFor(performance: Performance, with play: Play) -> Int {
         var result = 0

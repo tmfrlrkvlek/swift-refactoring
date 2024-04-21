@@ -29,7 +29,7 @@ final class UnitTest: XCTestCase {
             "as-like" : Play(name: "As You Like it", type: .comedy),
             "othello" : Play(name: "Othello", type: .tragedy)
         ]
-        let result = statement(invoice: invoice, plays: plays)
+        let result = try? statement(invoice: invoice, plays: plays)
         let expectedResult = """
 청구 내역 (고객명: BigCo)
  Hamlet: $650 (55석)
@@ -41,12 +41,27 @@ final class UnitTest: XCTestCase {
 """
         
         XCTAssertEqual(result, expectedResult)
+    }
+    
+    func testErrorExample() throws {
+        let invoice = Invoice(customer: "BigCo",
+                              performances: [
+                                Performance(playID: "hamlet", audience: 55),
+                                Performance(playID: "as-like", audience: 35),
+                                Performance(playID: "othello", audience: 40)
+                              ])
+        let plays = [
+            "hamlet_error" : Play(name: "Hamlet", type: .tragedy),
+            "as-like" : Play(name: "As You Like it", type: .comedy),
+            "othello" : Play(name: "Othello", type: .tragedy)
+        ]
+        do {
+            let _ = try statement(invoice: invoice, plays: plays)
+            XCTFail()
+        } catch {
+            XCTAssertEqual(error as? StatementError, StatementError.playIDNotMatched)
+        }
         
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
     }
 
     func testPerformanceExample() throws {

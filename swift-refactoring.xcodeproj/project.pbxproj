@@ -14,6 +14,11 @@
 		4AFDF7272BD5272700B9A399 /* invoices.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A59A95F2BD4DD8400FD8FCB /* invoices.json */; };
 		4AFDF7282BD5272700B9A399 /* plays.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4AFDF7122BD4E54600B9A399 /* plays.json */; };
 		4AFDF72A2BD52E4900B9A399 /* statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFDF7292BD52E4900B9A399 /* statement.swift */; };
+		4AFDF7322BD52F4700B9A399 /* UnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFDF7312BD52F4700B9A399 /* UnitTest.swift */; };
+		4AFDF7372BD52F5E00B9A399 /* statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFDF7292BD52E4900B9A399 /* statement.swift */; };
+		4AFDF7382BD52F6100B9A399 /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59A9622BD4DDF400FD8FCB /* Invoice.swift */; };
+		4AFDF7392BD52F6300B9A399 /* Performances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59A9642BD4DDFF00FD8FCB /* Performances.swift */; };
+		4AFDF73A2BD52F6500B9A399 /* Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59A9662BD4DE1400FD8FCB /* Play.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,10 +44,19 @@
 		4A59A9662BD4DE1400FD8FCB /* Play.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Play.swift; sourceTree = "<group>"; };
 		4AFDF7122BD4E54600B9A399 /* plays.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = plays.json; sourceTree = "<group>"; };
 		4AFDF7292BD52E4900B9A399 /* statement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = statement.swift; sourceTree = "<group>"; };
+		4AFDF72F2BD52F4700B9A399 /* UnitTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AFDF7312BD52F4700B9A399 /* UnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		4A59A9512BD4DCE700FD8FCB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AFDF72C2BD52F4700B9A399 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -56,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				4A59A9562BD4DCE700FD8FCB /* swift-refactoring */,
+				4AFDF7302BD52F4700B9A399 /* UnitTest */,
 				4A59A9552BD4DCE700FD8FCB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				4A59A9542BD4DCE700FD8FCB /* swift-refactoring */,
+				4AFDF72F2BD52F4700B9A399 /* UnitTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,6 +114,14 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		4AFDF7302BD52F4700B9A399 /* UnitTest */ = {
+			isa = PBXGroup;
+			children = (
+				4AFDF7312BD52F4700B9A399 /* UnitTest.swift */,
+			);
+			path = UnitTest;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -118,6 +142,23 @@
 			productReference = 4A59A9542BD4DCE700FD8FCB /* swift-refactoring */;
 			productType = "com.apple.product-type.tool";
 		};
+		4AFDF72E2BD52F4700B9A399 /* UnitTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AFDF7352BD52F4700B9A399 /* Build configuration list for PBXNativeTarget "UnitTest" */;
+			buildPhases = (
+				4AFDF72B2BD52F4700B9A399 /* Sources */,
+				4AFDF72C2BD52F4700B9A399 /* Frameworks */,
+				4AFDF72D2BD52F4700B9A399 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UnitTest;
+			productName = UnitTest;
+			productReference = 4AFDF72F2BD52F4700B9A399 /* UnitTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -129,6 +170,9 @@
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					4A59A9532BD4DCE700FD8FCB = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
+					4AFDF72E2BD52F4700B9A399 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
 				};
@@ -147,9 +191,20 @@
 			projectRoot = "";
 			targets = (
 				4A59A9532BD4DCE700FD8FCB /* swift-refactoring */,
+				4AFDF72E2BD52F4700B9A399 /* UnitTest */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4AFDF72D2BD52F4700B9A399 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4A59A9502BD4DCE700FD8FCB /* Sources */ = {
@@ -161,6 +216,18 @@
 				4AFDF72A2BD52E4900B9A399 /* statement.swift in Sources */,
 				4A59A9652BD4DDFF00FD8FCB /* Performances.swift in Sources */,
 				4A59A9672BD4DE1400FD8FCB /* Play.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AFDF72B2BD52F4700B9A399 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AFDF7322BD52F4700B9A399 /* UnitTest.swift in Sources */,
+				4AFDF7382BD52F6100B9A399 /* Invoice.swift in Sources */,
+				4AFDF7392BD52F6300B9A399 /* Performances.swift in Sources */,
+				4AFDF7372BD52F5E00B9A399 /* statement.swift in Sources */,
+				4AFDF73A2BD52F6500B9A399 /* Play.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +374,36 @@
 			};
 			name = Release;
 		};
+		4AFDF7332BD52F4700B9A399 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4CLMD5ZPC3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.UnitTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		4AFDF7342BD52F4700B9A399 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4CLMD5ZPC3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.UnitTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -324,6 +421,15 @@
 			buildConfigurations = (
 				4A59A95C2BD4DCE700FD8FCB /* Debug */,
 				4A59A95D2BD4DCE700FD8FCB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4AFDF7352BD52F4700B9A399 /* Build configuration list for PBXNativeTarget "UnitTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AFDF7332BD52F4700B9A399 /* Debug */,
+				4AFDF7342BD52F4700B9A399 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

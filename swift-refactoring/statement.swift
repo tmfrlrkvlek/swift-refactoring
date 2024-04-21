@@ -33,12 +33,12 @@ func statement(invoice: Invoice, plays: Plays) throws -> String {
     return result
     
     func volumeCreditsFor(_ performance: Performance) throws -> Int {
-        var volumeCredits = 0
-        volumeCredits += max(performance.audience - 30, 0)
+        var result = 0
+        result += max(performance.audience - 30, 0)
         if (try playFor(performance).type == .comedy) {
-            volumeCredits += Int(performance.audience / 5)
+            result += Int(performance.audience / 5)
         }
-        return volumeCredits
+        return result
     }
     
     func playFor(_ performance: Performance) throws -> Play {

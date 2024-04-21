@@ -23,15 +23,14 @@ func statement(invoice: Invoice, plays: Plays) throws -> String {
     var result = "청구 내역 (고객명: \(invoice.customer))\n"
 
     for performance in invoice.performances {
-        let play = try playFor(performance)
-        let amount = amountFor(performance: performance, with: play)
+        let amount = amountFor(performance: performance, with: try playFor(performance))
 
         volumeCredits += max(performance.audience - 30, 0)
-        if (play.type == .comedy) {
+        if (try playFor(performance).type == .comedy) {
             volumeCredits += Int(performance.audience / 5)
         }
 
-        result += " \(play.name): $\(amount/100) (\(performance.audience)석)\n"
+        result += " \(try playFor(performance).name): $\(amount/100) (\(performance.audience)석)\n"
         totalAmount += amount
     }
 

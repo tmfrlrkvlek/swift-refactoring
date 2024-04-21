@@ -24,17 +24,16 @@ func statement(invoice: Invoice, plays: Plays) throws -> String {
         result += " \(try playFor(performance).name): $\(try amountFor(performance)/100) (\(performance.audience)석)\n"
     }
     
-    let totalAmount = try temporaryFunction()
-    result += "총액: $\(totalAmount/10)\n"
+    result += "총액: $\(try totalAmount()/10)\n"
     result += "적립 포인트: \(try totalVolumeCredits())점\n"
     return result
     
-    func temporaryFunction() throws -> Int {
-        var totalAmount = 0
+    func totalAmount() throws -> Int {
+        var result = 0
         for performance in invoice.performances {
-            totalAmount += try amountFor(performance)
+            result += try amountFor(performance)
         }
-        return totalAmount
+        return result
     }
     
     func totalVolumeCredits() throws -> Int {

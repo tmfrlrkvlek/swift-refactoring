@@ -17,11 +17,14 @@ enum StatementError: Error {
     case playIDNotMatched
 }
 
+typealias StatementData = ()
+
 func statement(invoice: Invoice, plays: Plays) throws -> String {
-    try renderPlainText(invoice: invoice, plays: plays)
+    let data: StatementData = ()
+    return try renderPlainText(data: data, invoice: invoice, plays: plays)
 }
 
-func renderPlainText(invoice: Invoice, plays: Plays) throws -> String {
+func renderPlainText(data: StatementData, invoice: Invoice, plays: Plays) throws -> String {
     var result = "청구 내역 (고객명: \(invoice.customer))\n"
     for performance in invoice.performances {
         result += " \(try playFor(performance).name): $\(try amountFor(performance)/100) (\(performance.audience)석)\n"

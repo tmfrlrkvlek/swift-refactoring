@@ -17,16 +17,18 @@ enum StatementError: Error {
     case playIDNotMatched
 }
 
-typealias StatementData = ()
+typealias StatementData = (customer: String, performances: [Performance])
 
 func statement(invoice: Invoice, plays: Plays) throws -> String {
-    let data: StatementData = ()
-    return try renderPlainText(data: data, invoice: invoice, plays: plays)
+    let data: StatementData
+    data.customer = invoice.customer
+    data.performances = invoice.performances
+    return try renderPlainText(data: data, plays: plays)
 }
 
-func renderPlainText(data: StatementData, invoice: Invoice, plays: Plays) throws -> String {
-    var result = "청구 내역 (고객명: \(invoice.customer))\n"
-    for performance in invoice.performances {
+func renderPlainText(data: StatementData, plays: Plays) throws -> String {
+    var result = "청구 내역 (고객명: \(data.customer))\n"
+    for performance in data.performances {
         result += " \(try playFor(performance).name): $\(try amountFor(performance)/100) (\(performance.audience)석)\n"
     }
     result += "총액: $\(try totalAmount()/10)\n"
@@ -35,7 +37,7 @@ func renderPlainText(data: StatementData, invoice: Invoice, plays: Plays) throws
     
     func totalAmount() throws -> Int {
         var result = 0
-        for performance in invoice.performances {
+        for performance in data.performances {
             result += try amountFor(performance)
         }
         return result
@@ -43,7 +45,7 @@ func renderPlainText(data: StatementData, invoice: Invoice, plays: Plays) throws
     
     func totalVolumeCredits() throws -> Int {
         var result = 0
-        for performance in invoice.performances {
+        for performance in data.performances {
             result += try volumeCreditsFor(performance)
         }
         return result

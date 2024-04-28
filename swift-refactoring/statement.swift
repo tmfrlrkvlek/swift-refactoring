@@ -23,6 +23,7 @@ private struct EnrichedPerformance {
     let play: Play
     let audience: Int
     let amount: Int
+    let volumeCredits: Int
 }
 
 func statement(invoice: Invoice, plays: Plays) throws -> String {
@@ -39,12 +40,14 @@ func statement(invoice: Invoice, plays: Plays) throws -> String {
         let intermediateResult = EnrichedPerformance(
             play: try playFor(performance),
             audience: performance.audience,
-            amount: 0
+            amount: 0,
+            volumeCredits: 0
         )
         return EnrichedPerformance(
             play: intermediateResult.play,
             audience: intermediateResult.audience,
-            amount: amountFor(intermediateResult)
+            amount: amountFor(intermediateResult),
+            volumeCredits: volumeCreditsFor(intermediateResult)
         )
     }
     
@@ -72,6 +75,15 @@ func statement(invoice: Invoice, plays: Plays) throws -> String {
         }
         return result
     }
+    
+    func volumeCreditsFor(_ performance: EnrichedPerformance) -> Int {
+        var result = 0
+        result += max(performance.audience - 30, 0)
+        if (performance.play.type == .comedy) {
+            result += Int(performance.audience / 5)
+        }
+        return result
+    }
 }
 
 private func renderPlainText(data: StatementData) -> String {
@@ -94,16 +106,7 @@ private func renderPlainText(data: StatementData) -> String {
     func totalVolumeCredits() -> Int {
         var result = 0
         for performance in data.performances {
-            result += volumeCreditsFor(performance)
-        }
-        return result
-    }
-    
-    func volumeCreditsFor(_ performance: EnrichedPerformance) -> Int {
-        var result = 0
-        result += max(performance.audience - 30, 0)
-        if (performance.play.type == .comedy) {
-            result += Int(performance.audience / 5)
+            result += performance.volumeCredits
         }
         return result
     }

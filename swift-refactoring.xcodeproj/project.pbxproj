@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4A59A9582BD4DCE700FD8FCB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59A9572BD4DCE700FD8FCB /* main.swift */; };
 		4A59A9632BD4DDF400FD8FCB /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59A9622BD4DDF400FD8FCB /* Invoice.swift */; };
-		4A59A9652BD4DDFF00FD8FCB /* Performances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59A9642BD4DDFF00FD8FCB /* Performances.swift */; };
+		4A59A9652BD4DDFF00FD8FCB /* Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59A9642BD4DDFF00FD8FCB /* Performance.swift */; };
 		4A59A9672BD4DE1400FD8FCB /* Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59A9662BD4DE1400FD8FCB /* Play.swift */; };
 		4AFDF7272BD5272700B9A399 /* invoices.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A59A95F2BD4DD8400FD8FCB /* invoices.json */; };
 		4AFDF7282BD5272700B9A399 /* plays.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4AFDF7122BD4E54600B9A399 /* plays.json */; };
@@ -17,7 +17,7 @@
 		4AFDF7322BD52F4700B9A399 /* UnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFDF7312BD52F4700B9A399 /* UnitTest.swift */; };
 		4AFDF7372BD52F5E00B9A399 /* statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFDF7292BD52E4900B9A399 /* statement.swift */; };
 		4AFDF7382BD52F6100B9A399 /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59A9622BD4DDF400FD8FCB /* Invoice.swift */; };
-		4AFDF7392BD52F6300B9A399 /* Performances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59A9642BD4DDFF00FD8FCB /* Performances.swift */; };
+		4AFDF7392BD52F6300B9A399 /* Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59A9642BD4DDFF00FD8FCB /* Performance.swift */; };
 		4AFDF73A2BD52F6500B9A399 /* Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59A9662BD4DE1400FD8FCB /* Play.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,7 +40,7 @@
 		4A59A9572BD4DCE700FD8FCB /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		4A59A95F2BD4DD8400FD8FCB /* invoices.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = invoices.json; sourceTree = "<group>"; };
 		4A59A9622BD4DDF400FD8FCB /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
-		4A59A9642BD4DDFF00FD8FCB /* Performances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Performances.swift; sourceTree = "<group>"; };
+		4A59A9642BD4DDFF00FD8FCB /* Performance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Performance.swift; sourceTree = "<group>"; };
 		4A59A9662BD4DE1400FD8FCB /* Play.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Play.swift; sourceTree = "<group>"; };
 		4AFDF7122BD4E54600B9A399 /* plays.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = plays.json; sourceTree = "<group>"; };
 		4AFDF7292BD52E4900B9A399 /* statement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = statement.swift; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				4A59A9622BD4DDF400FD8FCB /* Invoice.swift */,
-				4A59A9642BD4DDFF00FD8FCB /* Performances.swift */,
+				4A59A9642BD4DDFF00FD8FCB /* Performance.swift */,
 				4A59A9662BD4DE1400FD8FCB /* Play.swift */,
 			);
 			path = Models;
@@ -214,7 +214,7 @@
 				4A59A9582BD4DCE700FD8FCB /* main.swift in Sources */,
 				4A59A9632BD4DDF400FD8FCB /* Invoice.swift in Sources */,
 				4AFDF72A2BD52E4900B9A399 /* statement.swift in Sources */,
-				4A59A9652BD4DDFF00FD8FCB /* Performances.swift in Sources */,
+				4A59A9652BD4DDFF00FD8FCB /* Performance.swift in Sources */,
 				4A59A9672BD4DE1400FD8FCB /* Play.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,7 +225,7 @@
 			files = (
 				4AFDF7322BD52F4700B9A399 /* UnitTest.swift in Sources */,
 				4AFDF7382BD52F6100B9A399 /* Invoice.swift in Sources */,
-				4AFDF7392BD52F6300B9A399 /* Performances.swift in Sources */,
+				4AFDF7392BD52F6300B9A399 /* Performance.swift in Sources */,
 				4AFDF7372BD52F5E00B9A399 /* statement.swift in Sources */,
 				4AFDF73A2BD52F6500B9A399 /* Play.swift in Sources */,
 			);

@@ -17,47 +17,25 @@ enum StatementError: Error {
     case playIDNotMatched
 }
 
-typealias StatementData = (customer: String, performances: [Performance])
+private typealias StatementData = (customer: String, performances: [EnrichedPerformance])
+
+private struct EnrichedPerformance {
+    let play: Play
+    let audience: Int
+}
 
 func statement(invoice: Invoice, plays: Plays) throws -> String {
     let data: StatementData
     data.customer = invoice.customer
-    data.performances = invoice.performances
-    return try renderPlainText(data: data, plays: plays)
-}
-
-func renderPlainText(data: StatementData, plays: Plays) throws -> String {
-    var result = "청구 내역 (고객명: \(data.customer))\n"
-    for performance in data.performances {
-        result += " \(try playFor(performance).name): $\(try amountFor(performance)/100) (\(performance.audience)석)\n"
+    var performances: [EnrichedPerformance] = []
+    for performance in invoice.performances {
+        performances.append(try enrich(performance))
     }
-    result += "총액: $\(try totalAmount()/10)\n"
-    result += "적립 포인트: \(try totalVolumeCredits())점\n"
-    return result
+    data.performances = performances
+    return renderPlainText(data: data)
     
-    func totalAmount() throws -> Int {
-        var result = 0
-        for performance in data.performances {
-            result += try amountFor(performance)
-        }
-        return result
-    }
-    
-    func totalVolumeCredits() throws -> Int {
-        var result = 0
-        for performance in data.performances {
-            result += try volumeCreditsFor(performance)
-        }
-        return result
-    }
-    
-    func volumeCreditsFor(_ performance: Performance) throws -> Int {
-        var result = 0
-        result += max(performance.audience - 30, 0)
-        if (try playFor(performance).type == .comedy) {
-            result += Int(performance.audience / 5)
-        }
-        return result
+    func enrich(_ performance: Performance) throws -> EnrichedPerformance {
+        return EnrichedPerformance(play: try playFor(performance), audience: performance.audience)
     }
     
     func playFor(_ performance: Performance) throws -> Play {
@@ -66,10 +44,45 @@ func renderPlainText(data: StatementData, plays: Plays) throws -> String {
         }
         return play
     }
+}
+
+private func renderPlainText(data: StatementData) -> String {
+    var result = "청구 내역 (고객명: \(data.customer))\n"
+    for performance in data.performances {
+        result += " \(performance.play.name): $\(amountFor(performance)/100) (\(performance.audience)석)\n"
+    }
+    result += "총액: $\(totalAmount()/10)\n"
+    result += "적립 포인트: \(totalVolumeCredits())점\n"
+    return result
     
-    func amountFor(_ performance: Performance) throws -> Int {
+    func totalAmount() -> Int {
         var result = 0
-        switch try playFor(performance).type {
+        for performance in data.performances {
+            result += amountFor(performance)
+        }
+        return result
+    }
+    
+    func totalVolumeCredits() -> Int {
+        var result = 0
+        for performance in data.performances {
+            result += volumeCreditsFor(performance)
+        }
+        return result
+    }
+    
+    func volumeCreditsFor(_ performance: EnrichedPerformance) -> Int {
+        var result = 0
+        result += max(performance.audience - 30, 0)
+        if (performance.play.type == .comedy) {
+            result += Int(performance.audience / 5)
+        }
+        return result
+    }
+    
+    func amountFor(_ performance: EnrichedPerformance) -> Int {
+        var result = 0
+        switch performance.play.type {
         case .tragedy :
             result = 40000
             if (performance.audience > 30) {

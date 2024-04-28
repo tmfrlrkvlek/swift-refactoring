@@ -22,6 +22,11 @@ private struct StatementData {
     let performances: [EnrichedPerformance]
 }
 
+private struct IntermediatePerformance {
+    let play: Play
+    let audience: Int
+}
+
 private struct EnrichedStatementData {
     let customer: String
     let performances: [EnrichedPerformance]
@@ -37,12 +42,10 @@ private struct EnrichedPerformance {
 }
 
 func statement(invoice: Invoice, plays: Plays) throws -> String {
-    var performances: [EnrichedPerformance] = []
-    for performance in invoice.performances {
-        performances.append(try enrich(performance))
-    }
-    let data = StatementData(customer: invoice.customer, performances: performances)
-    return renderPlainText(data: enrich(data))
+    return renderPlainText(data: enrich(StatementData(
+        customer: invoice.customer,
+        performances: try invoice.performances.map(enrich(_:)))
+    ))
     
     func enrich(_ data: StatementData) -> EnrichedStatementData {
         return EnrichedStatementData(
@@ -54,11 +57,9 @@ func statement(invoice: Invoice, plays: Plays) throws -> String {
     }
     
     func enrich(_ performance: Performance) throws -> EnrichedPerformance {
-        let intermediateResult = EnrichedPerformance(
+        let intermediateResult = IntermediatePerformance(
             play: try playFor(performance),
-            audience: performance.audience,
-            amount: 0,
-            volumeCredits: 0
+            audience: performance.audience
         )
         return EnrichedPerformance(
             play: intermediateResult.play,
@@ -75,7 +76,7 @@ func statement(invoice: Invoice, plays: Plays) throws -> String {
         return play
     }
     
-    func amountFor(_ performance: EnrichedPerformance) -> Int {
+    func amountFor(_ performance: IntermediatePerformance) -> Int {
         var result = 0
         switch performance.play.type {
         case .tragedy :
@@ -93,7 +94,7 @@ func statement(invoice: Invoice, plays: Plays) throws -> String {
         return result
     }
     
-    func volumeCreditsFor(_ performance: EnrichedPerformance) -> Int {
+    func volumeCreditsFor(_ performance: IntermediatePerformance) -> Int {
         var result = 0
         result += max(performance.audience - 30, 0)
         if (performance.play.type == .comedy) {
@@ -103,27 +104,19 @@ func statement(invoice: Invoice, plays: Plays) throws -> String {
     }
     
     func totalAmount(data: StatementData) -> Int {
-        var result = 0
-        for performance in data.performances {
-            result += performance.amount
-        }
-        return result
+        return data.performances.map({ $0.amount }).reduce(0, +)
     }
     
     func totalVolumeCredits(data: StatementData) -> Int {
-        var result = 0
-        for performance in data.performances {
-            result += performance.volumeCredits
-        }
-        return result
+        return data.performances.map({ $0.volumeCredits }).reduce(0, +)
     }
 }
 
 private func renderPlainText(data: EnrichedStatementData) -> String {
-    var result = "청구 내역 (고객명: \(data.customer))\n"
-    for performance in data.performances {
-        result += " \(performance.play.name): $\(performance.amount/100) (\(performance.audience)석)\n"
-    }
+    var result = data.performances.reduce("청구 내역 (고객명: \(data.customer))\n", { before, performance in
+        return before +
+        " \(performance.play.name): $\(performance.amount/100) (\(performance.audience)석)\n"
+    })
     result += "총액: $\(data.totalAmount/10)\n"
     result += "적립 포인트: \(data.totalVolumeCredits)점\n"
     return result

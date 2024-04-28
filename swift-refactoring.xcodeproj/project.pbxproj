@@ -19,6 +19,8 @@
 		4AFDF7382BD52F6100B9A399 /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59A9622BD4DDF400FD8FCB /* Invoice.swift */; };
 		4AFDF7392BD52F6300B9A399 /* Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59A9642BD4DDFF00FD8FCB /* Performance.swift */; };
 		4AFDF73A2BD52F6500B9A399 /* Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59A9662BD4DE1400FD8FCB /* Play.swift */; };
+		4AFDF73C2BDE4F4500B9A399 /* data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFDF73B2BDE4F4500B9A399 /* data.swift */; };
+		4AFDF73D2BDE4FD100B9A399 /* data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFDF73B2BDE4F4500B9A399 /* data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +48,7 @@
 		4AFDF7292BD52E4900B9A399 /* statement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = statement.swift; sourceTree = "<group>"; };
 		4AFDF72F2BD52F4700B9A399 /* UnitTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AFDF7312BD52F4700B9A399 /* UnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTest.swift; sourceTree = "<group>"; };
+		4AFDF73B2BDE4F4500B9A399 /* data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +94,7 @@
 				4A59A9612BD4DDEB00FD8FCB /* Models */,
 				4A59A9572BD4DCE700FD8FCB /* main.swift */,
 				4AFDF7292BD52E4900B9A399 /* statement.swift */,
+				4AFDF73B2BDE4F4500B9A399 /* data.swift */,
 			);
 			path = "swift-refactoring";
 			sourceTree = "<group>";
@@ -212,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A59A9582BD4DCE700FD8FCB /* main.swift in Sources */,
+				4AFDF73C2BDE4F4500B9A399 /* data.swift in Sources */,
 				4A59A9632BD4DDF400FD8FCB /* Invoice.swift in Sources */,
 				4AFDF72A2BD52E4900B9A399 /* statement.swift in Sources */,
 				4A59A9652BD4DDFF00FD8FCB /* Performance.swift in Sources */,
@@ -224,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AFDF7322BD52F4700B9A399 /* UnitTest.swift in Sources */,
+				4AFDF73D2BDE4FD100B9A399 /* data.swift in Sources */,
 				4AFDF7382BD52F6100B9A399 /* Invoice.swift in Sources */,
 				4AFDF7392BD52F6300B9A399 /* Performance.swift in Sources */,
 				4AFDF7372BD52F5E00B9A399 /* statement.swift in Sources */,

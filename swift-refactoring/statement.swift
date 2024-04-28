@@ -42,10 +42,14 @@ private struct EnrichedPerformance {
 }
 
 func statement(invoice: Invoice, plays: Plays) throws -> String {
-    return renderPlainText(data: enrich(StatementData(
+    return renderPlainText(data: try createStatementData(invoice: invoice, plays: plays))
+}
+
+private func createStatementData(invoice: Invoice, plays: Plays) throws -> EnrichedStatementData {
+    return enrich(StatementData(
         customer: invoice.customer,
         performances: try invoice.performances.map(enrich(_:)))
-    ))
+    )
     
     func enrich(_ data: StatementData) -> EnrichedStatementData {
         return EnrichedStatementData(

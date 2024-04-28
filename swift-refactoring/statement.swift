@@ -17,7 +17,17 @@ enum StatementError: Error {
     case playIDNotMatched
 }
 
-private typealias StatementData = (customer: String, performances: [EnrichedPerformance])
+private struct StatementData {
+    let customer: String
+    let performances: [EnrichedPerformance]
+}
+
+private struct EnrichedStatementData {
+    let customer: String
+    let performances: [EnrichedPerformance]
+    let totalAmount: Int
+    let totalVolumeCredits: Int
+}
 
 private struct EnrichedPerformance {
     let play: Play
@@ -27,14 +37,21 @@ private struct EnrichedPerformance {
 }
 
 func statement(invoice: Invoice, plays: Plays) throws -> String {
-    let data: StatementData
-    data.customer = invoice.customer
     var performances: [EnrichedPerformance] = []
     for performance in invoice.performances {
         performances.append(try enrich(performance))
     }
-    data.performances = performances
-    return renderPlainText(data: data)
+    let data = StatementData(customer: invoice.customer, performances: performances)
+    return renderPlainText(data: enrich(data))
+    
+    func enrich(_ data: StatementData) -> EnrichedStatementData {
+        return EnrichedStatementData(
+            customer: data.customer,
+            performances: data.performances,
+            totalAmount: totalAmount(data: data),
+            totalVolumeCredits: totalVolumeCredits(data: data)
+        )
+    }
     
     func enrich(_ performance: Performance) throws -> EnrichedPerformance {
         let intermediateResult = EnrichedPerformance(
@@ -84,18 +101,8 @@ func statement(invoice: Invoice, plays: Plays) throws -> String {
         }
         return result
     }
-}
-
-private func renderPlainText(data: StatementData) -> String {
-    var result = "청구 내역 (고객명: \(data.customer))\n"
-    for performance in data.performances {
-        result += " \(performance.play.name): $\(performance.amount/100) (\(performance.audience)석)\n"
-    }
-    result += "총액: $\(totalAmount()/10)\n"
-    result += "적립 포인트: \(totalVolumeCredits())점\n"
-    return result
     
-    func totalAmount() -> Int {
+    func totalAmount(data: StatementData) -> Int {
         var result = 0
         for performance in data.performances {
             result += performance.amount
@@ -103,11 +110,21 @@ private func renderPlainText(data: StatementData) -> String {
         return result
     }
     
-    func totalVolumeCredits() -> Int {
+    func totalVolumeCredits(data: StatementData) -> Int {
         var result = 0
         for performance in data.performances {
             result += performance.volumeCredits
         }
         return result
     }
+}
+
+private func renderPlainText(data: EnrichedStatementData) -> String {
+    var result = "청구 내역 (고객명: \(data.customer))\n"
+    for performance in data.performances {
+        result += " \(performance.play.name): $\(performance.amount/100) (\(performance.audience)석)\n"
+    }
+    result += "총액: $\(data.totalAmount/10)\n"
+    result += "적립 포인트: \(data.totalVolumeCredits)점\n"
+    return result
 }

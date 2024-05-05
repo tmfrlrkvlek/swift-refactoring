@@ -51,7 +51,10 @@ func createStatementData(invoice: Invoice, plays: Plays) throws -> EnrichedState
     }
     
     func enrich(_ performance: Performance) throws -> EnrichedPerformance {
-        let calculator = PerformanceCalculator(performance: performance, play: try playFor(performance))
+        let calculator = createPerformanceCalculator(
+            performance: performance,
+            play: try playFor(performance)
+        )
         let intermediateResult = IntermediatePerformance(
             play: try playFor(performance),
             audience: performance.audience
@@ -115,4 +118,8 @@ final class PerformanceCalculator {
         self.performance = performance
         self.play = play
     }
+}
+
+func createPerformanceCalculator(performance: Performance, play: Play) -> PerformanceCalculator {
+    return PerformanceCalculator(performance: performance, play: play)
 }

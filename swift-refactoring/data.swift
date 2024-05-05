@@ -105,3 +105,11 @@ func createStatementData(invoice: Invoice, plays: Plays) throws -> EnrichedState
         return data.performances.map({ $0.volumeCredits }).reduce(0, +)
     }
 }
+
+final class PerformanceCalculator {
+    private let performance: Performance
+    
+    init(performance: Performance) {
+        self.performance = performance
+    }
+}

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A2FB74C2BE77AA00067C34B /* Calculators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB74B2BE77AA00067C34B /* Calculators.swift */; };
+		4A2FB74D2BE77AEB0067C34B /* Calculators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB74B2BE77AA00067C34B /* Calculators.swift */; };
 		4A59A9582BD4DCE700FD8FCB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59A9572BD4DCE700FD8FCB /* main.swift */; };
 		4A59A9632BD4DDF400FD8FCB /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59A9622BD4DDF400FD8FCB /* Invoice.swift */; };
 		4A59A9652BD4DDFF00FD8FCB /* Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59A9642BD4DDFF00FD8FCB /* Performance.swift */; };
@@ -38,6 +40,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4A2FB74B2BE77AA00067C34B /* Calculators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculators.swift; sourceTree = "<group>"; };
 		4A59A9542BD4DCE700FD8FCB /* swift-refactoring */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "swift-refactoring"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A59A9572BD4DCE700FD8FCB /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		4A59A95F2BD4DD8400FD8FCB /* invoices.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = invoices.json; sourceTree = "<group>"; };
@@ -95,6 +98,7 @@
 				4A59A9572BD4DCE700FD8FCB /* main.swift */,
 				4AFDF7292BD52E4900B9A399 /* statement.swift */,
 				4AFDF73B2BDE4F4500B9A399 /* data.swift */,
+				4A2FB74B2BE77AA00067C34B /* Calculators.swift */,
 			);
 			path = "swift-refactoring";
 			sourceTree = "<group>";
@@ -219,6 +223,7 @@
 				4AFDF73C2BDE4F4500B9A399 /* data.swift in Sources */,
 				4A59A9632BD4DDF400FD8FCB /* Invoice.swift in Sources */,
 				4AFDF72A2BD52E4900B9A399 /* statement.swift in Sources */,
+				4A2FB74C2BE77AA00067C34B /* Calculators.swift in Sources */,
 				4A59A9652BD4DDFF00FD8FCB /* Performance.swift in Sources */,
 				4A59A9672BD4DE1400FD8FCB /* Play.swift in Sources */,
 			);
@@ -232,6 +237,7 @@
 				4AFDF73D2BDE4FD100B9A399 /* data.swift in Sources */,
 				4AFDF7382BD52F6100B9A399 /* Invoice.swift in Sources */,
 				4AFDF7392BD52F6300B9A399 /* Performance.swift in Sources */,
+				4A2FB74D2BE77AEB0067C34B /* Calculators.swift in Sources */,
 				4AFDF7372BD52F5E00B9A399 /* statement.swift in Sources */,
 				4AFDF73A2BD52F6500B9A399 /* Play.swift in Sources */,
 			);

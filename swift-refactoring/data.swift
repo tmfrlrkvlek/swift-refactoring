@@ -60,7 +60,7 @@ func createStatementData(invoice: Invoice, plays: Plays) throws -> EnrichedState
             play: intermediateResult.play,
             audience: intermediateResult.audience,
             amount: calculator.amount,
-            volumeCredits: volumeCreditsFor(intermediateResult)
+            volumeCredits: calculator.volumeCredits
         )
     }
     
@@ -69,15 +69,6 @@ func createStatementData(invoice: Invoice, plays: Plays) throws -> EnrichedState
             throw StatementError.playIDNotMatched
         }
         return play
-    }
-    
-    func volumeCreditsFor(_ performance: IntermediatePerformance) -> Int {
-        var result = 0
-        result += max(performance.audience - 30, 0)
-        if (performance.play.type == .comedy) {
-            result += Int(performance.audience / 5)
-        }
-        return result
     }
     
     func totalAmount(data: StatementData) -> Int {
@@ -107,6 +98,15 @@ final class PerformanceCalculator {
                 result += 10000 + 500 * (self.performance.audience - 20)
             }
             result += 300 * self.performance.audience
+        }
+        return result
+    }
+    
+    var volumeCredits: Int {
+        var result = 0
+        result += max(self.performance.audience - 30, 0)
+        if (self.play.type == .comedy) {
+            result += Int(self.performance.audience / 5)
         }
         return result
     }

@@ -59,7 +59,7 @@ func createStatementData(invoice: Invoice, plays: Plays) throws -> EnrichedState
         return EnrichedPerformance(
             play: intermediateResult.play,
             audience: intermediateResult.audience,
-            amount: amountFor(intermediateResult),
+            amount: calculator.amount,
             volumeCredits: volumeCreditsFor(intermediateResult)
         )
     }
@@ -69,24 +69,6 @@ func createStatementData(invoice: Invoice, plays: Plays) throws -> EnrichedState
             throw StatementError.playIDNotMatched
         }
         return play
-    }
-    
-    func amountFor(_ performance: IntermediatePerformance) -> Int {
-        var result = 0
-        switch performance.play.type {
-        case .tragedy :
-            result = 40000
-            if (performance.audience > 30) {
-                result += 1000 * (performance.audience - 30)
-            }
-        case .comedy :
-            result = 30000
-            if (performance.audience > 20) {
-                result += 10000 + 500 * (performance.audience - 20)
-            }
-            result += 300 * performance.audience
-        }
-        return result
     }
     
     func volumeCreditsFor(_ performance: IntermediatePerformance) -> Int {
@@ -110,6 +92,24 @@ func createStatementData(invoice: Invoice, plays: Plays) throws -> EnrichedState
 final class PerformanceCalculator {
     private let performance: Performance
     private let play: Play
+    
+    var amount: Int {
+        var result = 0
+        switch self.play.type {
+        case .tragedy :
+            result = 40000
+            if (self.performance.audience > 30) {
+                result += 1000 * (self.performance.audience - 30)
+            }
+        case .comedy :
+            result = 30000
+            if (self.performance.audience > 20) {
+                result += 10000 + 500 * (self.performance.audience - 20)
+            }
+            result += 300 * self.performance.audience
+        }
+        return result
+    }
     
     init(performance: Performance, play: Play) {
         self.performance = performance

@@ -92,12 +92,7 @@ class PerformanceCalculator {
     let play: Play
     
     var volumeCredits: Int {
-        var result = 0
-        result += max(self.performance.audience - 30, 0)
-        if (self.play.type == .comedy) {
-            result += Int(self.performance.audience / 5)
-        }
-        return result
+        return max(self.performance.audience - 30, 0)
     }
     
     init(performance: Performance, play: Play) {
@@ -131,5 +126,9 @@ final class ComedyCalculator: PerformanceCalculator, AmountCalculator {
         }
         result += 300 * self.performance.audience
         return result
+    }
+    
+    override var volumeCredits: Int {
+        return super.volumeCredits + Int(self.performance.audience / 5)
     }
 }

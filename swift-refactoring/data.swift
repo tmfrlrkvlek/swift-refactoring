@@ -83,27 +83,13 @@ func createStatementData(invoice: Invoice, plays: Plays) throws -> EnrichedState
     }
 }
 
-final class PerformanceCalculator {
-    private let performance: Performance
-    private let play: Play
-    
-    var amount: Int {
-        var result = 0
-        switch self.play.type {
-        case .tragedy :
-            result = 40000
-            if (self.performance.audience > 30) {
-                result += 1000 * (self.performance.audience - 30)
-            }
-        case .comedy :
-            result = 30000
-            if (self.performance.audience > 20) {
-                result += 10000 + 500 * (self.performance.audience - 20)
-            }
-            result += 300 * self.performance.audience
-        }
-        return result
-    }
+protocol AmountCalculator {
+    var amount: Int { get }
+}
+
+class PerformanceCalculator {
+    let performance: Performance
+    let play: Play
     
     var volumeCredits: Int {
         var result = 0
@@ -120,6 +106,30 @@ final class PerformanceCalculator {
     }
 }
 
-func createPerformanceCalculator(performance: Performance, play: Play) -> PerformanceCalculator {
-    return PerformanceCalculator(performance: performance, play: play)
+func createPerformanceCalculator(performance: Performance, play: Play) -> PerformanceCalculator & AmountCalculator {
+    switch play.type {
+    case .tragedy : return TragedyCalculator(performance: performance, play: play)
+    case .comedy : return ComedyCalculator(performance: performance, play: play)
+    }
+}
+
+final class TragedyCalculator: PerformanceCalculator, AmountCalculator {
+    var amount: Int {
+        var result = 40000
+        if (self.performance.audience > 30) {
+            result += 1000 * (self.performance.audience - 30)
+        }
+        return result
+    }
+}
+
+final class ComedyCalculator: PerformanceCalculator, AmountCalculator {
+    var amount: Int {
+        var result = 30000
+        if (self.performance.audience > 20) {
+            result += 10000 + 500 * (self.performance.audience - 20)
+        }
+        result += 300 * self.performance.audience
+        return result
+    }
 }

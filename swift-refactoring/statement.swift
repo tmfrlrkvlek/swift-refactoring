@@ -9,8 +9,9 @@ import Foundation
 
 /**
  수정할 부분
- 1. 청구 내역을 HTML로 출력하는 부분 필요
- 2. 연극 장르와 공연료 정책이 달라질 때마다 statement() 함수를 수정해야 함
+~~ 1. 청구 내역을 HTML로 출력하는 부분 필요~~
+ ~~2. 연극 장르와 공연료 정책이 달라질 때마다 statement() 함수를 수정해야 함~~
+    => 새로운 장르를 추가하려면 해당 장르의 서브클래스를 작성하고, `createPerformanceCalculator()` 함수에 추가하면 됨
  **/
 
 func statement(invoice: Invoice, plays: Plays) throws -> String {
